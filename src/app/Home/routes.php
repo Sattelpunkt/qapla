@@ -1,5 +1,5 @@
 <?php
 
-$this->add('/', 'Home\Controller\HomeController', 'POST');
+$this->add('/penis', 'Home\Controller\Home', 'GET');
 
-$this->add('/', 'Home\Controller\HomeController@get', 'GET');
+$this->add('/', 'Home\Controller\Home@get', 'GET');

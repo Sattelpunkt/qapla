@@ -1,1 +1,62 @@
 <?php
+
+namespace Core;
+
+use Config\AppConfig;
+
+class BaseResponse
+{
+    private string $content;
+    private string $title;
+    private string $contentPath;
+    private array $output = [];
+
+    public function setContentTemplate($class, $content, $title = "")
+    {
+        $this->title = ($title == "") ? AppConfig::get('default_site_title') : $title;
+
+        $class = strstr($class, 'Service', TRUE);
+        $class .= "Response" . "\\";
+        $this->contentPath = str_replace("\\", "/", $class);
+        $this->content = $content;
+    }
+
+    public function __set(string|array $name, string|array $value): void
+    {
+        $this->output[$name] = $value;
+    }
+
+    public function __get($name): string|array
+    {
+        return $this->output[$name];
+    }
+
+    public function render(): void
+    {
+        extract($this->output);
+
+        ob_start();
+
+        $fullPath = SRC . DS . $this->contentPath . $this->content . ".phtml";
+
+        if (file_exists($fullPath)) {
+            include($fullPath);
+        } else {
+            echo "<br /><b>Fehler:</b> Content wurde nicht gefunden";
+            #ToDo Weiterleitung auf Error;
+        }
+    }
+
+    public function renderPart(string $name): void
+    {
+        $fullPath = SRC . DS . 'Response' . DS . $name . '.phtml';
+        if (file_exists($fullPath)) {
+            include($fullPath);
+        } else {
+            echo "<br /><b>Fehler:</b> Header wurde nicht gefunden";
+            #ToDo Weiterleitung auf Error;
+        }
+    }
+
+    #ToDo FlashMessage
+}

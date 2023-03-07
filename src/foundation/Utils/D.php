@@ -11,6 +11,7 @@ class D
         print_r($data);
         echo "</pre><br />";
         echo "Programm has stopped";
+        die();
     }
 
 }

@@ -1,9 +1,6 @@
 <?php
-
 use Foundation\Request\Session;
 use Foundation\Request\Router;
-use Config\AppConfig;
-
 
 //Grundlegendes Definieren
 define('DS', DIRECTORY_SEPARATOR);
@@ -12,6 +9,7 @@ define('SRC', PROOT . 'src');
 define('URL', $_SERVER['SERVER_NAME'] . '/');
 
 require_once SRC . DS . 'foundation' . DS . 'Bootstrap' . DS . 'Autoload.php';
+
 
 Session::start();
 

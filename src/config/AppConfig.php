@@ -13,7 +13,7 @@ class AppConfig
         'year' => '2023',
         'root_dir' => '/',
         'default_action' => 'index',
-        'default_site_title' => 'Base',
+        'default_site_title' => 'Qapla',
         'default_site_header' => 'header',
         'default_site_navigation' => 'navigation',
         'default_site_message' => 'message',
@@ -21,7 +21,7 @@ class AppConfig
 
     public static function get($name): string|int
     {
-        return array_key_exists($name, static::$config) ? static::$config[$name] : "";
+        return array_key_exists($name, self::$config) ? self::$config[$name] : "";
     }
 
 }
