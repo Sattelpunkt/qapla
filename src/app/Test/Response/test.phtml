@@ -7,6 +7,7 @@ $this->renderPart('Navigation');
             <div class="col-12 box">
                 <div class="boxheader">Alle Netzwerke</div>
                 <div class="boxbody">
+
                     <table class="table table-borderless table_main">
                         <thead>
                         <tr>
@@ -55,7 +56,6 @@ $this->renderPart('Navigation');
                 </div>
                 <div class="boxfooter"></div>
             </div>
-
             <div class="col-12 box">
                 <div class="boxheader">Notiz</div>
                 <div class="boxbody">
@@ -101,6 +101,9 @@ $this->renderPart('Navigation');
                 </div>
                 <div class="boxfooter"></div>
             </div>
+            <?php
+            $this->displayMSG();
+            ?>
 
 
         </div>

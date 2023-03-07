@@ -3,6 +3,7 @@
 namespace Core;
 
 use Config\AppConfig;
+use Foundation\Bootstrap\FlashMessage;
 
 class BaseResponse
 {
@@ -58,6 +59,16 @@ class BaseResponse
         }
     }
 
-    #ToDo FlashMessage
+    public function displayMSG(): void
+    {
+        foreach (FlashMessage::get() as $key => $values) {
+            echo '<div id=flash-container>';
+            foreach ($values as $value) {
+                require SRC . DS . 'app' . DS . 'Response' . DS . 'flash.phtml';
+            }
+            echo "</div>";
+        }
+        FlashMessage::delete();
+    }
 
 }
