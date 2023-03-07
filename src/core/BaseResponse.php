@@ -49,14 +49,15 @@ class BaseResponse
 
     public function renderPart(string $name): void
     {
-        $fullPath = SRC . DS . 'Response' . DS . $name . '.phtml';
+        $fullPath = SRC . DS . 'app' . DS . 'Response' . DS . $name . '.phtml';
         if (file_exists($fullPath)) {
             include($fullPath);
         } else {
-            echo "<br /><b>Fehler:</b> Header wurde nicht gefunden";
+            echo "<br /><b>Fehler:</b> Part wurde nicht gefunden";
             #ToDo Weiterleitung auf Error;
         }
     }
 
     #ToDo FlashMessage
+
 }
