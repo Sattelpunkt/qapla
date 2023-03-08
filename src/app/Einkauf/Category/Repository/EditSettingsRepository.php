@@ -20,7 +20,6 @@ class EditSettingsRepository
     {
         $db = new Database('EinkaufCat');
         return $db->update(['name'])->where("id", "=", ":id")->args([':name' => $name, ':id' => $id ])->run();
-        //return ($this->db->run('UPDATE `EinkaufCat` SET `name` = :name WHERE `id` = :id', [':name' => $name, ':id' => $id]));
     }
 
 }

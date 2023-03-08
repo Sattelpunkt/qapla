@@ -23,8 +23,10 @@ $this->renderPart('Navigation');
                                     <?php if ($cat->getId() != 1) { ?>
                                         <a href="https://<?= URL ?>cat/settings/edit/<?= $cat->getId() ?>"><i
                                                     class="fas fa-pen"
-                                                    aria-hidden="true"></i></a>&nbsp; &nbsp;&nbsp; &nbsp;<i
-                                                class="fas fa-trash"></i>
+                                                    aria-hidden="true"></i></a>&nbsp; &nbsp;&nbsp; &nbsp;
+                                        <a href="https://<?= URL ?>cat/settings/delete/<?= $cat->getId() ?>"><i
+                                                    class="fas fa-trash"
+                                                    aria-hidden="true"></i></a>
                                     <?php } ?>
                                 </td>
                             </tr>
