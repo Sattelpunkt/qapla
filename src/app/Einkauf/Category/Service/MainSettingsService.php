@@ -16,4 +16,11 @@ class MainSettingsService extends BaseService
         $this->response->__set('cat', $repository->getAll());
         $this->response->render();
     }
+
+    public function newCat($cat): bool {
+
+        $repository = new MainSettingsRepository();
+
+        return $repository->newCat($cat);
+    }
 }

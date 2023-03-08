@@ -7,7 +7,6 @@ namespace Config;
 class ModulConfig
 {
     protected static array $config = [
-        'Home',
         'test',
         'Einkauf/Category',
 

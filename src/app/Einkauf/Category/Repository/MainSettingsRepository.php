@@ -3,20 +3,28 @@
 namespace App\Einkauf\Category\Repository;
 
 use App\Einkauf\Category\Model\CategoryModel;
-use Core\BaseRepository;
+use Foundation\Database\Database;
 use Foundation\Utils\D;
 
-class MainSettingsRepository extends BaseRepository
+class MainSettingsRepository
 {
 
-    public  function getAll() : array
+    public function getAll(): array
     {
-        $dbResult =  $this->db->row($this->db->run('SELECT * FROM `EinkaufCat`'));
+        $db = new Database('EinkaufCat');
+        $dbResult = $db->select()->run();
         $result = [];
         foreach ($dbResult as $value) {
-            $result[] = new CategoryModel($value['id'],$value['name']);
+            $result[] = new CategoryModel($value['id'], $value['name']);
         }
 
         return $result;
+    }
+
+    public function newCat($name): bool
+    {
+        $db = new Database('EinkaufCat');
+        $args = [':name' => $name];
+        return $db->insert(['name'])->args($args)->run();
     }
 }

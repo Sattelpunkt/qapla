@@ -9,73 +9,127 @@ use PDOException;
 class Database
 {
 
-    private $dsn, $user, $pass;
-    private static $db = null;
-    private $dbh,  $stmt;
-    private $options = [
+    private string $dsn, $user, $pass, $table, $query ;
+    private PDO $dbh;
+    private bool $select = false;
+    private array $args = [], $options = [
         PDO::ATTR_PERSISTENT => true,
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ];
 
-
-    private function __construct()
+    public function __construct($table)
     {
-        $this->dsn = "mysql:host=" . DatabaseConfig::get('Host'). ";dbname=" .DatabaseConfig::get('Name');
+        $this->dsn = "mysql:host=" . DatabaseConfig::get('Host') . ";dbname=" . DatabaseConfig::get('Name');
         $this->user = DatabaseConfig::get('User');
         $this->pass = DatabaseConfig::get('Password');
+        $this->table = $table;
+        $this->connect();
 
+    }
 
+    private function connect(): void
+    {
         try {
             $this->dbh = new PDO($this->dsn, $this->user, $this->pass, $this->options);
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
         }
-
     }
 
-    public static function getInstance(): ?Database
+    public function select(array $columns = ['*']) : Database
     {
-        if (self::$db == null) {
-            self::$db = new self();
+        $this->select = true;
+        $columns = implode(',', $columns);
+        $this->query = "SELECT $columns FROM `$this->table`";
+        return $this;
+    }
+
+    public function delete() : Database
+    {
+        $this->query = "DELETE FROM `$this->table`";
+        return $this;
+    }
+
+    public function update(array $data) : Database
+    {
+
+        $this->query = "UPDATE `$this->table` SET ";
+        foreach ($data as $value) {
+            $this->query .= $value . " = :" . $value . ",";
         }
-        return self::$db;
+        $this->query = substr($this->query, 0, -1);
+        return $this;
     }
 
-
-
-    public function __destruct()
+    public function insert(array $data) : Database
     {
-        $db = null;
-        $dbh = null;
-    }
-
-    public function run($sql, $args = null, $fetch = null)
-    {
-        if (!$args) {
-            return $this->dbh->query($sql);
+        $this->query = "INSERT INTO `$this->table` (";
+        $this->query .= implode(', ', $data) . ") VALUES ( ";
+        foreach ($data as $value) {
+            $this->query .= ":$value, ";
         }
-        $stmt = $this->dbh->prepare($sql);
-        if($fetch == null) {
-            return $stmt->execute($args);
+        $this->query = substr($this->query, 0, -2);
+        $this->query .= (" )");
+        return $this;
+    }
+
+
+    public function where($column, $operator, $value) : Database
+    {
+        $this->query .= " WHERE `$column` $operator $value";
+        return $this;
+    }
+
+    public function orderBy($column, $direction = 'ASC') : Database
+    {
+        $this->query .= " ORDER BY `$column` $direction";
+        return $this;
+    }
+
+    public function limt($limit) : Database
+    {
+        $this->query .= " Limit $limit";
+        return $this;
+    }
+
+    public function offset($offset) : Database
+    {
+        $this->query .= " OFFSET $offset";
+        return $this;
+    }
+
+    public function join($foreignTable, $operator, $ownTable) : Database
+    {
+        $this->query .= " JOIN `$foreignTable` $operator `$ownTable`";
+        return $this;
+    }
+
+    public function args(array $args) : Database
+    {
+        $this->args = $args;
+        return $this;
+    }
+
+    public function run(): array|bool
+    {
+        if (!empty($this->args)) {
+            $stmt = $this->dbh->prepare($this->query);
+            $stmt->execute($this->args);
         } else {
-            $stmt->execute($args);
-            return $this->$fetch($stmt);
+            $stmt = $this->dbh->query($this->query);
         }
-
-    }
-
-    public function row($stmt)
-    {
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function col($stmt)
-    {
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    public function getLastInsertID()
-    {
-        return $this->dbh->lastInsertId();
+        if ($this->select) {
+            $this->select = false;
+            if ($stmt->rowCount() == 1) {
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            } else {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+        }
+        if ($stmt->rowCount() >= 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
