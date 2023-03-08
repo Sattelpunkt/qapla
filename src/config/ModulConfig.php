@@ -9,7 +9,7 @@ class ModulConfig
     protected static array $config = [
         'test',
         'Einkauf/Category',
-
+        'Einkauf/Shop',
     ];
 
     public static function getModule(): array
