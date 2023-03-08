@@ -8,7 +8,7 @@ class DatabaseConfig
         'Host' => 'ddev-qapla-db:3306',
         'User' => 'root',
         'Password' => 'root',
-        'Name' => 'whitelist'
+        'Name' => 'shoplist2'
     ];
 
     public static function get($name): string|int

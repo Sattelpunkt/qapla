@@ -3,6 +3,7 @@
 namespace App\Test\Controller;
 
 use App\Test\Service\HomeService;
+use Foundation\Bootstrap\FlashMessage;
 
 class HomeController
 {
@@ -13,6 +14,7 @@ class HomeController
 
     public function indexAction(array $params, array $cleanData): void
     {
+        //FlashMessage::add('danger', 'Keven ist der Beste');
         $service = new HomeService();
         $service->printTestTemplate();
     }
