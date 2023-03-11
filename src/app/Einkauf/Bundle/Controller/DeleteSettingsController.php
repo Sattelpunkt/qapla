@@ -12,7 +12,7 @@ class DeleteSettingsController
     public function indexAction(array $params, array $cleanData): void
     {
         if ($params['id'] == 1) {
-            FlashMessage::add('warning', 'Das Gebinde undefiniert darf nicht gelöscht werden');
+            FlashMessage::add('warning', 'Das Gebinde -- -- darf nicht gelöscht werden');
             Router::go('cat/settings');
         }
         $service = new DeleteSettingsService();

@@ -1,3 +1,5 @@
+<?php $navigationInformation = $this->__get('navigationInformation'); ?>
+
 <div class="container-fluid overflow-hidden">
     <div class="row vh-100 overflow-auto">
         <div class="sidebar p-2" style="width: 240px;">
@@ -26,26 +28,20 @@
                         <i class="fa fa-book" aria-hidden="true"></i>&nbsp; &nbsp;Kategorien&nbsp; &nbsp;<i
                                 class="fa fa-angle-down" aria-hidden="true"></i>
                     </a>
+
+                    <?php foreach ($navigationInformation['cat'] as $cat ) { ?>
+                    <!-- Kategorie Block -->
                     <div class="collapse" id="dashboard-collapse1">
                         <ul class="nav nav-pills flex-column mb-auto navigation">
-                            <li><a href="https://<?= URL ?>genre/settings" class="nav-link text-white childlist"><i
+                            <li><a href="https://<?= URL ?>cat/detail/:<?= $cat['id'] ?>" class="nav-link text-white childlist"><i
                                             class="fa fa-book"
                                             aria-hidden="true"></i>&nbsp;
-                                    &nbsp;Test Kategorien</a></li>
+                                    &nbsp;<?= $cat['name'] ?></a></li>
 
                         </ul>
                     </div>
-                    <div class="collapse" id="dashboard-collapse1">
-                        <ul class="nav nav-pills flex-column mb-auto navigation">
-                            <li><a href="https://<?= URL ?>genre/settings" class="nav-link text-white childlist"><i
-                                            class="fa fa-book"
-                                            aria-hidden="true"></i>&nbsp;
-                                    &nbsp;Test Kategorien 2</a></li>
-
-                        </ul>
-
-
-                    </div>
+                    <!-- Kategorie Block Ende -->
+                    <?php } ?>
                 </li>
 
 
@@ -55,32 +51,27 @@
                         <i class="fas fa-store" aria-hidden="true"></i>&nbsp; &nbsp;Shops&nbsp; &nbsp;<i
                                 class="fa fa-angle-down" aria-hidden="true"></i>
                     </a>
+
+                    <?php foreach ($navigationInformation['shop'] as $shop ) { ?>
+                    <!-- Kategorie Block -->
                     <div class="collapse" id="dashboard-collapse2">
                         <ul class="nav nav-pills flex-column mb-auto navigation">
-                            <li><a href="https://<?= URL ?>genre/settings" class="nav-link text-white childlist"><i
+                            <li><a href="https://<?= URL ?>shop/detail/<?= $shop['id'] ?>" class="nav-link text-white childlist"><i
                                             class="fas fa-store"
                                             aria-hidden="true"></i>&nbsp;
-                                    &nbsp;Test Shop</a></li>
+                                    &nbsp;<?= $shop['name'] ?></a></li>
 
                         </ul>
                     </div>
-                    <div class="collapse" id="dashboard-collapse2">
-                        <ul class="nav nav-pills flex-column mb-auto navigation">
-                            <li><a href="https://<?= URL ?>genre/settings" class="nav-link text-white childlist"><i
-                                            class="fas fa-store"
-                                            aria-hidden="true"></i>&nbsp;
-                                    &nbsp;Test Shop 2</a></li>
+                    <!-- Kategorie Block Ende -->
+                    <?php } ?>
 
-                        </ul>
-
-
-                    </div>
                 </li>
                 <li class="nav-item">
-                <a href="https://<?= URL ?>home" class="nav-link text-white">
+                    <a href="https://<?= URL ?>home" class="nav-link text-white">
 
-                    <i class="fas fa-shopping-cart" aria-hidden="true"></i>&nbsp; &nbsp;Gekauft
-                </a>
+                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>&nbsp; &nbsp;Gekauft
+                    </a>
                 </li>
 
                 <li class="nav-item">
@@ -129,10 +120,9 @@
                 </li>
 
 
-
-            <div class="sitebar-header-small">
-                <span class="fs-5">Truhe</span>
-            </div>
+                <div class="sitebar-header-small">
+                    <span class="fs-5">Truhe</span>
+                </div>
 
                 <li class="nav-item">
                     <a href="https://<?= URL ?>home" class="nav-link text-white active">
@@ -198,7 +188,6 @@
                 </li>
 
             </ul>
-
 
 
             <br/><br/><br/>

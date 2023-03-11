@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Einkauf\Shop\Repository\MainSettingsRepository AS Shop;
+use App\Einkauf\Category\Repository\MainSettingsRepository AS Cat;
 use Config\AppConfig;
 use Foundation\Bootstrap\FlashMessage;
 
@@ -50,6 +52,9 @@ class BaseResponse
 
     public function renderPart(string $name): void
     {
+        if ($name == 'Navigation') {
+            $this->__set('navigationInformation', $this->getNavigationInformation());
+        }
         $fullPath = SRC . DS . 'app' . DS . 'Response' . DS . $name . '.phtml';
         if (file_exists($fullPath)) {
             include($fullPath);
@@ -69,6 +74,28 @@ class BaseResponse
             echo "</div>";
         }
         FlashMessage::delete();
+    }
+
+    public function getNavigationInformation(): array
+    {
+        //EinkaufShop
+        $repository = new Shop();
+        $result = $repository->getAll();
+        foreach ($result as $value) {
+            $return['shop'][] = [
+                'id' => $value->getId(),
+                'name' => $value->getName()
+            ];
+        }
+        $repository = new Cat;
+        $result = $repository->getAll();
+        foreach ($result as $value) {
+            $return['cat'][] = [
+                'id' => $value->getId(),
+                'name' => $value->getName()
+            ];
+        }
+        return $return;
     }
 
 }

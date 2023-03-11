@@ -15,9 +15,9 @@ class EditSettingsRepository
         return $result;
     }
 
-    public function updateBundleByID(int $id, string $name) :bool
+    public function updateBundleByID(int $id, string $name): bool
     {
         $db = new Database('EinkaufBundle');
-        return $db->update(['name'])->where("id", "=", ":id")->args([':name' => $name, ':id' => $id ])->run();
+        return $db->update(['name'])->where("id", "=", ":id")->args([':name' => $name, ':id' => $id])->run();
     }
 }

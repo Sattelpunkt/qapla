@@ -11,7 +11,7 @@ class  EditSettingsController
     public function indexAction(array $params, array $cleanData): void
     {
         if ($params['id'] == 1) {
-            FlashMessage::add('warning', 'Das Gebinde undefiniert darf nicht bearbeitet werden');
+            FlashMessage::add('warning', 'Das Gebinde -- -- darf nicht bearbeitet werden');
             Router::go('bundle/settings');
         }
         $service = new EditSettingsService();
