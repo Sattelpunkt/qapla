@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Einkauf\Category\Controller;
+namespace App\Einkauf\Shop\Controller;
 
 
-use App\Einkauf\Category\Service\DeleteSettingsService;
+use App\Einkauf\Shop\Service\DeleteSettingsService;
 use Foundation\Bootstrap\FlashMessage;
 use Foundation\Request\Router;
 
-class deleteSettingsController
+class DeleteSettingsController
 {
-
     public function indexAction(array $params, array $cleanData): void
     {
         if ($params['id'] == 1) {
-            FlashMessage::add('warning', 'Die Kategorie undefiniert darf nicht gelöscht werden');
+            FlashMessage::add('warning', 'Der Shop undefiniert darf nicht gelöscht werden');
             Router::go('cat/settings');
         }
         $service = new DeleteSettingsService();
         if ($service->deleteCat($params['id'])) {
-            FlashMessage::add('success', 'Kategorie wurde gelöscht');
+            FlashMessage::add('success', 'Shop wurde gelöscht');
         } else {
             FlashMessage::add('danger', 'Es ist ein Fehler passiert');
         }
-        Router::go('cat/settings');
+        Router::go('shop/settings');
+
     }
 }

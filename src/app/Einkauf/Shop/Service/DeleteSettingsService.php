@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Einkauf\Category\Service;
+namespace App\Einkauf\Shop\Service;
 
 
-use App\Einkauf\Category\Repository\DeleteSettingsRepository;
+
+use App\Einkauf\Shop\Repository\DeleteSettingsRepository;
 
 class DeleteSettingsService
 {
@@ -11,6 +12,5 @@ class DeleteSettingsService
     {
         $repository = new DeleteSettingsRepository();
         return $repository->deleteById($id);
-
     }
 }

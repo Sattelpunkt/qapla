@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Einkauf\Category\Service;
+namespace App\Einkauf\Bundle\Service;
 
 
-use App\Einkauf\Category\Repository\DeleteSettingsRepository;
+
+use App\Einkauf\Bundle\Repository\DeleteSettingsRepository;
 
 class DeleteSettingsService
 {
-    public function deleteCat($id): bool
+    public function deleteBundle($id): bool
     {
         $repository = new DeleteSettingsRepository();
         return $repository->deleteById($id);
-
     }
 }

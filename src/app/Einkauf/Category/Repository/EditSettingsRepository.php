@@ -8,7 +8,7 @@ use Foundation\Utils\D;
 
 class EditSettingsRepository
 {
-    public function getCatByID($id): array
+    public function getCatByID(int $id): array
     {
         $db = new Database('EinkaufCat');
         $dbResult = $db->select()->where("id", "=",":id")->args([':id' => $id])->run();
@@ -16,7 +16,7 @@ class EditSettingsRepository
         return $result;
     }
 
-    public function updateCatByID($id, $name): bool
+    public function updateCatByID(int $id, string $name): bool
     {
         $db = new Database('EinkaufCat');
         return $db->update(['name'])->where("id", "=", ":id")->args([':name' => $name, ':id' => $id ])->run();
