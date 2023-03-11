@@ -11,7 +11,6 @@ class MainSettingsRepository
     {
         $db = new Database('EinkaufBundle');
         $dbresult = $db->select()->run();
-        $result = [];
         foreach ($dbresult as $value) {
             $result[] = new BundleModel($value['id'], $value['name']);
         }

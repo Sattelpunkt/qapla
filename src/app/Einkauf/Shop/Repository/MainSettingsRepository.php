@@ -11,7 +11,6 @@ class MainSettingsRepository
     {
         $db = new Database('EinkaufShop');
         $dbresult = $db->select()->run();
-        $result = [];
         foreach ($dbresult as $value) {
             $result[] = new ShopModel($value['id'], $value['name']);
         }

@@ -9,6 +9,7 @@ class ModulConfig
         'Einkauf/Category',
         'Einkauf/Shop',
         'Einkauf/Bundle',
+        'Einkauf/Article',
     ];
 
     public static function getModule(): array

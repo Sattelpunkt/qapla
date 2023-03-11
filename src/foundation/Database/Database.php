@@ -9,7 +9,7 @@ use PDOException;
 class Database
 {
 
-    private string $dsn, $user, $pass, $table, $query ;
+    private string $dsn, $user, $pass, $table, $query;
     private PDO $dbh;
     private bool $select = false;
     private array $args = [], $options = [
@@ -36,7 +36,7 @@ class Database
         }
     }
 
-    public function select(array $columns = ['*']) : Database
+    public function select(array $columns = ['*']): Database
     {
         $this->select = true;
         $columns = implode(',', $columns);
@@ -44,13 +44,13 @@ class Database
         return $this;
     }
 
-    public function delete() : Database
+    public function delete(): Database
     {
         $this->query = "DELETE FROM `$this->table`";
         return $this;
     }
 
-    public function update(array $data) : Database
+    public function update(array $data): Database
     {
 
         $this->query = "UPDATE `$this->table` SET ";
@@ -61,7 +61,7 @@ class Database
         return $this;
     }
 
-    public function insert(array $data) : Database
+    public function insert(array $data): Database
     {
         $this->query = "INSERT INTO `$this->table` (";
         $this->query .= implode(', ', $data) . ") VALUES ( ";
@@ -74,37 +74,37 @@ class Database
     }
 
 
-    public function where($column, $operator, $value) : Database
+    public function where(string $column, string $operator, string $value): Database
     {
         $this->query .= " WHERE `$column` $operator $value";
         return $this;
     }
 
-    public function orderBy($column, $direction = 'ASC') : Database
+    public function orderBy(string $column, string $direction = 'ASC'): Database
     {
         $this->query .= " ORDER BY `$column` $direction";
         return $this;
     }
 
-    public function limt($limit) : Database
+    public function limt(int $limit): Database
     {
         $this->query .= " Limit $limit";
         return $this;
     }
 
-    public function offset($offset) : Database
+    public function offset(string $offset): Database
     {
         $this->query .= " OFFSET $offset";
         return $this;
     }
 
-    public function join($foreignTable, $operator, $ownTable) : Database
+    public function join(string $table, string $on): Database
     {
-        $this->query .= " JOIN `$foreignTable` $operator `$ownTable`";
+        $this->query .= " JOIN $table ON $on";
         return $this;
     }
 
-    public function args(array $args) : Database
+    public function args(array $args): Database
     {
         $this->args = $args;
         return $this;
