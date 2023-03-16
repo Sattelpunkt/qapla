@@ -10,8 +10,11 @@ class ArticleModel
     private string $bundle;
     private string $shop;
     private string $cat;
+    private int $catID;
+    private int $bundleID;
+    private int $shopID;
 
-    public function __construct(int $id, string $anzahl, string $name, string $bundle, string $shop, string $cat)
+    public function __construct(int $id, string $anzahl, string $name, string $bundle, string $shop, string $cat, int $catID = 0, int $bundleID = 0, int $shopID = 0)
     {
         $this->id = $id;
         $this->anzahl = $anzahl;
@@ -19,6 +22,25 @@ class ArticleModel
         $this->bundle = $bundle;
         $this->shop = $shop;
         $this->cat = $cat;
+        $this->catID = $catID;
+        $this->bundleID = $bundleID;
+        $this->shopID = $shopID;
+    }
+
+    public function getShopID(): int
+    {
+        return $this->shopID;
+    }
+
+
+    public function getCatID(): string
+    {
+        return $this->catID;
+    }
+
+    public function getBundleID(): string
+    {
+        return $this->bundleID;
     }
 
 

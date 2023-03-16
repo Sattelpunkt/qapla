@@ -76,7 +76,7 @@ class Database
 
     public function where(string $column, string $operator, string $value): Database
     {
-        $this->query .= " WHERE `$column` $operator $value";
+        $this->query .= " WHERE $column $operator $value";
         return $this;
     }
 
@@ -112,6 +112,8 @@ class Database
 
     public function run(): array|bool
     {
+        //echo $this->query;
+        //echo "<br />";
         if (!empty($this->args)) {
             $stmt = $this->dbh->prepare($this->query);
             $stmt->execute($this->args);
