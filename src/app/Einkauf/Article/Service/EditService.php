@@ -26,4 +26,12 @@ class EditService extends BaseService
         $this->response->__set('dropdown', $dropdown);
         $this->response->render();
     }
+
+    public function updateArticle(int $id, array $data): bool
+    {
+        $repository = new EditRepository();
+        return $repository->UpdateArticleByID($id, $data);
+
+    }
+
 }

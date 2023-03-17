@@ -24,5 +24,21 @@ class EditRepository
 
         return $result;
     }
+
+    public function UpdateArticleByID(int $id, array $data) : bool
+    {
+        $db = new Database('EinkaufArticle');
+        return $db->update(['anzahl', 'name', 'bundle_id', 'cat_id', 'shop_id'])
+            ->where("id" , "=", ":id")
+            ->args([
+                ':anzahl' => intval($data['anzahl']),
+                ':name' => $data['name'],
+                ':bundle_id' => intval($data['bundle']),
+                ':cat_id' => intval($data['cat']),
+                ':shop_id' => intval($data['shop']),
+                ':id' => $id
+            ])
+            ->run();
+    }
 }
 

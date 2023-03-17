@@ -9,18 +9,18 @@ $article = $article[0];
         <div class="content">
 
             <div class="col-12 box">
-                <div class="boxheader">Neue Artikel anlegen</div>
+                <div class="boxheader">Artikel bearbeiten</div>
                 <div class="boxbody">
 
                     <form class="row g-3" method="post" action="https://<?= URL ?>article/edit/<?= $article->getId() ?>">
 
                         <div class="col-md-1">
                             <label for="inputAnzahl" class="form-label">Anzahl</label>
-                            <input type="text" class="form-control" id="inputAnzahl" name="anzahl[]" value="<?= $article->getAnzahl() ?>">
+                            <input type="text" class="form-control" id="inputAnzahl" name="anzahl" value="<?= $article->getAnzahl() ?>">
                         </div>
                         <div class="col-md-2">
                             <label for="inputGebinde" class="form-label">Gebinde</label>
-                            <select id="inputGebinde" class="form-select" name="bundle[]">
+                            <select id="inputGebinde" class="form-select" name="bundle">
                                 <option value="<?= $article->getBundleID() ?>>"><?= $article->getBundle() ?></option>
                                 <option  disabled>--------------------</option>
                                 <?php foreach ($dropdown['bundle'] as $bundle) { ?>
@@ -30,11 +30,11 @@ $article = $article[0];
                         </div>
                         <div class="col-md-4">
                             <label for="inputName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="inputName" name="name[]" value="<?= $article->getName() ?>">
+                            <input type="text" class="form-control" id="inputName" name="name" value="<?= $article->getName() ?>">
                         </div>
                         <div class="col-md-2">
                             <label for="inputCat" class="form-label">Kategorie</label>
-                            <select id="inputCat" class="form-select" name="cat[]">
+                            <select id="inputCat" class="form-select" name="cat">
                                 <option value="<?= $article->getCatID() ?>>"><?= $article->getCat() ?></option>
                                 <option  disabled>--------------------</option>
                                 <?php foreach ($dropdown['cat'] as $cat) { ?>
@@ -44,7 +44,7 @@ $article = $article[0];
                         </div>
                         <div class="col-md-2">
                             <label for="inputShop" class="form-label">Shop</label>
-                            <select id="inputShop" class="form-select" name="shop[]">
+                            <select id="inputShop" class="form-select" name="shop">
                                 <option value="<?= $article->getShopID() ?>>"><?= $article->getShop() ?></option>
                                 <option  disabled>--------------------</option>
                                 <?php foreach ($dropdown['shop'] as $shop) { ?>
@@ -52,10 +52,9 @@ $article = $article[0];
                                 <?php } ?>
                             </select>
                         </div>
-                        <hr/>
 
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary graybutton">Anlegen</button>
+                            <button type="submit" class="btn btn-primary graybutton">bearbeiten</button>
                         </div>
                     </form>
 

@@ -18,4 +18,20 @@ class EditController
         $service->printEdit($params['id']);
 
     }
+
+    public function updateAction(array $params, array $cleanData): void
+    {
+        if (empty($params['id'])) {
+            Router::go('');
+        }
+        $service = new EditService();
+        if ($service->updateArticle($params['id'], $cleanData['post'])) {
+            FlashMessage::add('success', 'Artikel wurden bearbeitet');
+        } else {
+            FlashMessage::add('danger', 'Es ist ein Fehler passiert');
+        }
+        Router::go('');
+
+    }
+
 }
