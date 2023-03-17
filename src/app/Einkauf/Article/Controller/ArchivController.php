@@ -6,6 +6,7 @@ namespace App\Einkauf\Article\Controller;
 use App\Einkauf\Article\Service\ArchivService;
 use Foundation\Bootstrap\FlashMessage;
 use Foundation\Request\Router;
+use Foundation\Utils\D;
 
 class ArchivController
 {
@@ -14,14 +15,24 @@ class ArchivController
         if (empty($params['id'])) {
             Router::go('');
         }
-        $serivce = new ArchivService();
-        if ($serivce->archivArticle($params['id'])) {
+        $service = new ArchivService();
+        if ($service->archivArticle($params['id'])) {
             FlashMessage::add('success', 'Artikel wurden ins Archiv verschoben');
         } else {
             FlashMessage::add('danger', 'Es ist ein Fehler passiert');
         }
+        if (!empty($params['callback'])) {
+            $params['callback'] = str_replace('--', '/', $params['callback']);
+            Router::go($params['callback']);
+        } else {
+            Router::go('');
+        }
+    }
 
-        Router::go('');
+    public function printAction($params, array $cleanData): void
+    {
+        $service = new ArchivService();
+        $service->printArchiv();
     }
 
 

@@ -14,14 +14,21 @@ class BoughtController
         if (empty($params['id'])) {
             Router::go('');
         }
-        $serivce = new BoughtService();
-        if ($serivce->boughtArticle($params['id'])) {
+        $service = new BoughtService();
+        if ($service->boughtArticle($params['id'])) {
             FlashMessage::add('success', 'Artikel wurden gekauft');
         } else {
             FlashMessage::add('danger', 'Es ist ein Fehler passiert');
         }
 
         Router::go('');
+    }
+
+    public function printAction($params, array $cleanData): void
+    {
+        $service = new BoughtService();
+        $service->printBought();
+
     }
 
 

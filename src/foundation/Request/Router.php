@@ -23,7 +23,7 @@ class Router
             'pattern' => "#^$pattern$#",
             'handler' => $handler,
             'method' => $method,
-            'middleware' => $middleware
+            'middleware' => $middleware,
         ];
     }
 
@@ -68,7 +68,7 @@ class Router
         $cleanUserData = $mwInstance->handle();
         if (!empty($middleware)) {
             foreach ($middleware as $mw) {
-                $mw = 'App\\'. $mw . 'Middleware';
+                $mw = 'App\\' . $mw . 'Middleware';
                 $mwInstance = new $mw();
                 $mwInstance->handle();
             }
@@ -76,11 +76,10 @@ class Router
         return $cleanUserData;
     }
 
-    public static function go($location): void
+    public static function go(string $location): void
     {
         header('Location: https://' . URL . $location);
         exit();
     }
-
 
 }
