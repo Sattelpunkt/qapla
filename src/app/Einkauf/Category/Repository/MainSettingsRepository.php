@@ -13,8 +13,15 @@ class MainSettingsRepository
     {
         $db = new Database('EinkaufCat');
         $dbResult = $db->select()->run();
-        foreach ($dbResult as $value) {
-            $result[] = new CategoryModel($value['id'], $value['name']);
+
+        if (array_key_exists(1, $dbResult)) {
+            foreach ($dbResult as $value) {
+                $result[] = new CategoryModel($value['id'], $value['name']);
+            }
+        } elseif (empty($dbResult)) {
+            $result = [];
+        } else {
+            $result[] = new CategoryModel($dbResult['id'], $dbResult['name']);
         }
 
         return $result;

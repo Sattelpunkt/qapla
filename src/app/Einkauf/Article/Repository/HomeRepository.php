@@ -23,7 +23,7 @@ class HomeRepository
                 $result[] = new ArticleModel($article['id'], $article['anzahl'], $article['name'], $article['bundle'], $article['shop'], $article['cat']);
             }
         } elseif (empty($dbResult)) {
-            return [];
+            $result = [];
         } else {
             $result[] = new ArticleModel($dbResult['id'], $dbResult['anzahl'], $dbResult['name'], $dbResult['bundle'], $dbResult['shop'], $dbResult['cat']);
         }

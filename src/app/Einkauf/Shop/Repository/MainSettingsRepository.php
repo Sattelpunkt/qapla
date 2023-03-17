@@ -11,8 +11,14 @@ class MainSettingsRepository
     {
         $db = new Database('EinkaufShop');
         $dbresult = $db->select()->run();
-        foreach ($dbresult as $value) {
-            $result[] = new ShopModel($value['id'], $value['name']);
+        if (array_key_exists(1, $dbresult)) {
+            foreach ($dbresult as $value) {
+                $result[] = new ShopModel($value['id'], $value['name']);
+            }
+        } elseif (empty($dbResult)) {
+            $result = [];
+        } else {
+            $result[] = new ShopModel($dbResult['id'], $dbResult['name']);
         }
         return $result;
     }

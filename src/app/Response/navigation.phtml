@@ -29,19 +29,23 @@
                                 class="fa fa-angle-down" aria-hidden="true"></i>
                     </a>
 
-                    <?php foreach ($navigationInformation['cat'] as $cat ) { ?>
-                    <!-- Kategorie Block -->
-                    <div class="collapse" id="dashboard-collapse1">
-                        <ul class="nav nav-pills flex-column mb-auto navigation">
-                            <li><a href="https://<?= URL ?>cat/detail/<?= $cat['id'] ?>" class="nav-link text-white childlist"><i
-                                            class="fa fa-book"
-                                            aria-hidden="true"></i>&nbsp;
-                                    &nbsp;<?= $cat['name'] ?></a></li>
+                    <?php
+                    if (!empty($navigationInformation['cat'])) {
+                        foreach ($navigationInformation['cat'] as $cat) { ?>
+                            <!-- Kategorie Block -->
+                            <div class="collapse" id="dashboard-collapse1">
+                                <ul class="nav nav-pills flex-column mb-auto navigation">
+                                    <li><a href="https://<?= URL ?>cat/detail/<?= $cat['id'] ?>"
+                                           class="nav-link text-white childlist"><i
+                                                    class="fa fa-book"
+                                                    aria-hidden="true"></i>&nbsp;
+                                            &nbsp;<?= $cat['name'] ?></a></li>
 
-                        </ul>
-                    </div>
-                    <!-- Kategorie Block Ende -->
-                    <?php } ?>
+                                </ul>
+                            </div>
+                            <!-- Kategorie Block Ende -->
+                        <?php }
+                    } ?>
                 </li>
 
 
@@ -52,19 +56,23 @@
                                 class="fa fa-angle-down" aria-hidden="true"></i>
                     </a>
 
-                    <?php foreach ($navigationInformation['shop'] as $shop ) { ?>
-                    <!-- Kategorie Block -->
-                    <div class="collapse" id="dashboard-collapse2">
-                        <ul class="nav nav-pills flex-column mb-auto navigation">
-                            <li><a href="https://<?= URL ?>shop/detail/<?= $shop['id'] ?>" class="nav-link text-white childlist"><i
-                                            class="fas fa-store"
-                                            aria-hidden="true"></i>&nbsp;
-                                    &nbsp;<?= $shop['name'] ?></a></li>
+                    <?php
+                    if (!empty($navigationInformation['shop'])) {
+                        foreach ($navigationInformation['shop'] as $shop) { ?>
+                            <!-- Kategorie Block -->
+                            <div class="collapse" id="dashboard-collapse2">
+                                <ul class="nav nav-pills flex-column mb-auto navigation">
+                                    <li><a href="https://<?= URL ?>shop/detail/<?= $shop['id'] ?>"
+                                           class="nav-link text-white childlist"><i
+                                                    class="fas fa-store"
+                                                    aria-hidden="true"></i>&nbsp;
+                                            &nbsp;<?= $shop['name'] ?></a></li>
 
-                        </ul>
-                    </div>
-                    <!-- Kategorie Block Ende -->
-                    <?php } ?>
+                                </ul>
+                            </div>
+                            <!-- Kategorie Block Ende -->
+                        <?php }
+                    } ?>
 
                 </li>
                 <li class="nav-item">
