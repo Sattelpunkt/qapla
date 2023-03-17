@@ -37,4 +37,13 @@ class BoughtRepository
         }
         return $result;
     }
+
+    public function allToArchiv() : bool
+    {
+        $db = new Database('EinkaufArticle');
+        return $db->update(['type'])
+            ->where("type", "=", ":typeID")
+            ->args([':typeID' => 1, ':type' => 2])
+            ->run();
+    }
 }

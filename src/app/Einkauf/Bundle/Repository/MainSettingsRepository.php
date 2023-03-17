@@ -11,8 +11,13 @@ class MainSettingsRepository
     {
         $db = new Database('EinkaufBundle');
         $dbresult = $db->select()->run();
-        foreach ($dbresult as $value) {
-            $result[] = new BundleModel($value['id'], $value['name']);
+        $result = [];
+        if (array_key_exists(1, $dbresult)) {
+            foreach ($dbresult as $value) {
+                $result[] = new BundleModel($value['id'], $value['name']);
+            }
+        } else {
+            $result[] = new BundleModel($dbresult['id'], $dbresult['name']);
         }
         return $result;
     }

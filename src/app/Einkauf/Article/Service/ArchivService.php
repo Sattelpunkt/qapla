@@ -20,4 +20,10 @@ class ArchivService extends BaseService
         $this->response->__set('article', $repository->getAll());
         $this->response->render();
     }
+
+    public function deleteAll() : bool
+    {
+        $repository = new ArchivRepository();
+        return $repository->deleteAll();
+    }
 }

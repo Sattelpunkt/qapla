@@ -35,5 +35,16 @@ class ArchivController
         $service->printArchiv();
     }
 
+    public function deleteAllAction($params, array $cleanData): void
+    {
+        $service = new ArchivService();
+        if ($service->deleteAll()) {
+            FlashMessage::add('success', 'Archiv wurde gelöscht');
+        } else {
+            FlashMessage::add('danger', 'Es ist ein Fehler passiert');
+        }
+        Router::go('article/archiv');
+    }
+
 
 }

@@ -31,5 +31,17 @@ class BoughtController
 
     }
 
+    public function allToArchivAction($params, array $cleanData): void
+    {
+        $service = new BoughtService();
+        if ($service->allToArchiv()) {
+            FlashMessage::add('success', 'Alle Artikel sind ins Archiv übertragen worden');
+        } else {
+            FlashMessage::add('danger', 'Es ist ein Fehler passiert');
+        }
+        Router::go('article/archiv');
+
+    }
+
 
 }

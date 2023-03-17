@@ -4,20 +4,20 @@ namespace App\Einkauf\Shop\Repository;
 
 use App\Einkauf\Shop\Model\ShopModel;
 use Foundation\Database\Database;
+use Foundation\Utils\D;
 
 class MainSettingsRepository
 {
     public function getAll(): array
     {
         $db = new Database('EinkaufShop');
-        $dbresult = $db->select()->run();
-        if (array_key_exists(1, $dbresult)) {
-            foreach ($dbresult as $value) {
+        $dbResult = $db->select()->run();
+        $result = [];
+        if (array_key_exists(1, $dbResult)) {
+            foreach ($dbResult as $value) {
                 $result[] = new ShopModel($value['id'], $value['name']);
             }
-        } elseif (empty($dbResult)) {
-            $result = [];
-        } else {
+        }  else {
             $result[] = new ShopModel($dbResult['id'], $dbResult['name']);
         }
         return $result;

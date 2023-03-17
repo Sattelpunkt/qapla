@@ -21,4 +21,10 @@ class BoughtService extends BaseService
         $this->response->render();
     }
 
+    public function allToArchiv(): bool
+    {
+        $repository = new BoughtRepository();
+        return $repository->allToArchiv();
+    }
+
 }

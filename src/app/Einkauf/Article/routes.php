@@ -18,4 +18,7 @@ $this->add('/article/bought', 'Einkauf\Article\Controller\Bought@print', 'GET');
 
 $this->add('/article/archiv', 'Einkauf\Article\Controller\Archiv@print', 'GET');
 
-$this->add('/article/bought/archiv', 'Einkauf\Article\Controller\Bought@allToArchiv', 'GET');
+$this->add('/bought/archiv', 'Einkauf\Article\Controller\Bought@allToArchiv', 'GET');
+
+$this->add('/archiv/delete', 'Einkauf\Article\Controller\Archiv@deleteAll', 'GET');
+

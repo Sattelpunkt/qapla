@@ -18,12 +18,11 @@ class HomeRepository
             ->where('EinkaufArticle.type', '=', ':type')
             ->args([':type' => 0])
             ->run();
+        $result = [];
         if (array_key_exists(1, $dbResult)) {
             foreach ($dbResult as $article) {
                 $result[] = new ArticleModel($article['id'], $article['anzahl'], $article['name'], $article['bundle'], $article['shop'], $article['cat']);
             }
-        } elseif (empty($dbResult)) {
-            $result = [];
         } else {
             $result[] = new ArticleModel($dbResult['id'], $dbResult['anzahl'], $dbResult['name'], $dbResult['bundle'], $dbResult['shop'], $dbResult['cat']);
         }

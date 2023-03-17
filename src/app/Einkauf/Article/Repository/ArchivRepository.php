@@ -37,4 +37,10 @@ class ArchivRepository
         }
         return $result;
     }
+
+    public function deleteAll() :bool
+    {
+        $db = new Database('EinkaufArticle');
+        return $db->delete()->where("type", "=",":type")->args([':type' => 2])->run();
+    }
 }

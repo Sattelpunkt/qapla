@@ -4,6 +4,7 @@ namespace Foundation\Request;
 
 use Config\ModulConfig;
 use Config\AppConfig;
+use Foundation\Utils\D;
 
 class Router
 {
@@ -38,6 +39,7 @@ class Router
 
                     }
                 }
+                //D::dnd($route);
                 $this->callHandler($route['handler'], $params, $route['middleware']);
                 return;
             }
