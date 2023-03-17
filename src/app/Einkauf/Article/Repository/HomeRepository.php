@@ -15,9 +15,17 @@ class HomeRepository
             ->join('EinkaufBundle', 'EinkaufArticle.bundle_id = EinkaufBundle.id')
             ->join('EinkaufShop', 'EinkaufArticle.shop_id = EinkaufShop.id')
             ->join('EinkaufCat', 'EinkaufArticle.cat_id = EinkaufCat.id')
+            ->where('EinkaufArticle.type', '=', ':type')
+            ->args([':type' => 0])
             ->run();
-        foreach ($dbResult as $article) {
-            $result[] = new ArticleModel($article['id'], $article['anzahl'], $article['name'], $article['bundle'], $article['shop'], $article['cat']);
+        if (array_key_exists(1, $dbResult)) {
+            foreach ($dbResult as $article) {
+                $result[] = new ArticleModel($article['id'], $article['anzahl'], $article['name'], $article['bundle'], $article['shop'], $article['cat']);
+            }
+        } elseif (empty($dbResult)) {
+            return [];
+        } else {
+            $result[] = new ArticleModel($dbResult['id'], $dbResult['anzahl'], $dbResult['name'], $dbResult['bundle'], $dbResult['shop'], $dbResult['cat']);
         }
         return $result;
     }

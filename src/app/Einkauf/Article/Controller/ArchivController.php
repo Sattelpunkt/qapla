@@ -3,18 +3,18 @@
 namespace App\Einkauf\Article\Controller;
 
 
-use App\Einkauf\Article\Service\DeleteService;
+use App\Einkauf\Article\Service\ArchivService;
 use Foundation\Bootstrap\FlashMessage;
 use Foundation\Request\Router;
 
-class DeleteController
+class ArchivController
 {
     public function indexAction(array $params, array $cleanData): void
     {
         if (empty($params['id'])) {
             Router::go('');
         }
-        $serivce = new DeleteService();
+        $serivce = new ArchivService();
         if ($serivce->deleteArticle($params['id'])) {
             FlashMessage::add('success', 'Artikel wurden gelöscht');
         } else {

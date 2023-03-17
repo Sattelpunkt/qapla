@@ -104,6 +104,12 @@ class Database
         return $this;
     }
 
+    public function addToQuery(string $query): Database
+    {
+        $this->query .= $query;
+        return $this;
+    }
+
     public function args(array $args): Database
     {
         $this->args = $args;

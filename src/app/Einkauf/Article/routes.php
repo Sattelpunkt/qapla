@@ -10,4 +10,4 @@ $this->add('/article/edit/:id', 'Einkauf\Article\Controller\Edit', 'GET');
 
 $this->add('/article/edit/:id', 'Einkauf\Article\Controller\Edit@update', 'POST');
 
-$this->add('/article/delete/:id', 'Einkauf\Article\Controller\Delete', 'GET');
+$this->add('/article/archiv/:id', 'Einkauf\Article\Controller\Archiv', 'GET');
