@@ -6,7 +6,7 @@ use App\Einkauf\Article\Repository\ArchivRepository;
 
 class ArchivService
 {
-    public function deleteArticle(int $id) : bool
+    public function archivArticle(int $id) : bool
     {
          $repository = new ArchivRepository();
          return $repository->toArchivByID($id);
