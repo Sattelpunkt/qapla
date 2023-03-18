@@ -15,7 +15,7 @@ class HomeRepository
             ->join('EinkaufBundle', 'EinkaufArticle.bundle_id = EinkaufBundle.id')
             ->join('EinkaufShop', 'EinkaufArticle.shop_id = EinkaufShop.id')
             ->join('EinkaufCat', 'EinkaufArticle.cat_id = EinkaufCat.id')
-            ->where('EinkaufArticle.type', '=', ':type')
+            ->where('type', '=', ':type')
             ->args([':type' => 0])
             ->run();
         if (array_key_exists(1, $dbResult)) {

@@ -8,7 +8,6 @@ class FlashMessage
 {
     public static function add($type, $msg): void
     {
-        print_r($_SESSION);
         if (isset($_SESSION['message'][$type])) {
             array_unshift($_SESSION['message'][$type], $msg);
         } else {

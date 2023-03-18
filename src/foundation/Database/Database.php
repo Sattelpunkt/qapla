@@ -76,7 +76,7 @@ class Database
 
     public function where(string $column, string $operator, string $value): Database
     {
-        $this->query .= " WHERE $column $operator $value";
+        $this->query .= " WHERE `$column` $operator $value";
         return $this;
     }
 
@@ -100,13 +100,25 @@ class Database
 
     public function join(string $table, string $on): Database
     {
-        $this->query .= " JOIN $table ON $on";
+        $this->query .= "  JOIN $table ON $on";
+        return $this;
+    }
+
+    public function leftJoin(string $table, string $on): Database
+    {
+        $this->query .= " LEFT JOIN $table ON $on";
         return $this;
     }
 
     public function addToQuery(string $query): Database
     {
-        $this->query .= " ".$query;
+        $this->query .= " " . $query;
+        return $this;
+    }
+
+    public function query(string $query): Database
+    {
+        $this->query = $query;
         return $this;
     }
 
@@ -119,7 +131,7 @@ class Database
     public function run(): array|bool
     {
         //echo $this->query;
-       //echo "<br />";
+        //echo "<br />";
         if (!empty($this->args)) {
             $stmt = $this->dbh->prepare($this->query);
             $stmt->execute($this->args);
@@ -139,5 +151,10 @@ class Database
         } else {
             return false;
         }
+    }
+
+    public function printError(): void
+    {
+        print_r($this->error);
     }
 }

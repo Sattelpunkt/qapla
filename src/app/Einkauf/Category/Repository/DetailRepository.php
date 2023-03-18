@@ -14,7 +14,7 @@ class DetailRepository
             ->join('EinkaufBundle', 'EinkaufArticle.bundle_id = EinkaufBundle.id')
             ->join('EinkaufShop', 'EinkaufArticle.shop_id = EinkaufShop.id')
             ->join('EinkaufCat', 'EinkaufArticle.cat_id = EinkaufCat.id')
-            ->where('EinkaufArticle.type', '=', ':type')
+            ->where('type', '=', ':type')
             ->addToQuery('AND EinkaufArticle.cat_id = :catID')
             ->args([':type' => 0, ':catID' => $cat_id])
             ->run();

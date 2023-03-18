@@ -16,7 +16,7 @@ class HomeController
         //FlashMessage::add('danger', 'Keven ist der Beste');
         //$service = new HomeService();
         //$service->printTestTemplate();
-        $db = new newDatabase('EinkaufCat');
+        $db = new Database('EinkaufCat');
         $result = $db->select(['name'])->where("id", "=",":id")->args([':id' => 1])->run();
         //$result = $db->delete()->where("id", "=", ":id")->args([':id' => 42])->run();
         //$result = $db->update(['name'])->where("id", "=", ":id")->args([':name' => 'Monic rieht gut', ':id' => 14 ])->run();

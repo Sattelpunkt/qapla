@@ -13,6 +13,7 @@ class EditSettingsService extends BaseService
         $repository = new EditSettingsRepository();
         $this->response->setContentTemplate(get_class($this), 'EditSettings');
         $this->response->__set('shop', $repository->getShopByID($id));
+        $this->response->__set('catsort', $repository->getSortCatByShopID($id));
         $this->response->render();
     }
 
