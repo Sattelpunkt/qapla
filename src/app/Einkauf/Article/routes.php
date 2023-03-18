@@ -22,3 +22,5 @@ $this->add('/bought/archiv', 'Einkauf\Article\Controller\Bought@allToArchiv', 'G
 
 $this->add('/archiv/delete', 'Einkauf\Article\Controller\Archiv@deleteAll', 'GET');
 
+$this->add('/article/print', 'Einkauf\Article\Controller\Print', 'GET');
+

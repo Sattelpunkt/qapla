@@ -58,6 +58,7 @@ main {
     font-size: 15px;
 
 }
+
 .navigation li:last-child {
     border: none;
 }
@@ -167,9 +168,15 @@ tr {
 .alert {
     font-size: 12px;
 }
+
 a {
     text-decoration: none;
-    color:inherit;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+    color: darkgray;
 }
 
 .bluebutton {
