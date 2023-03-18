@@ -106,7 +106,7 @@ class Database
 
     public function addToQuery(string $query): Database
     {
-        $this->query .= $query;
+        $this->query .= " ".$query;
         return $this;
     }
 
@@ -119,7 +119,7 @@ class Database
     public function run(): array|bool
     {
         //echo $this->query;
-        //echo "<br />";
+       //echo "<br />";
         if (!empty($this->args)) {
             $stmt = $this->dbh->prepare($this->query);
             $stmt->execute($this->args);

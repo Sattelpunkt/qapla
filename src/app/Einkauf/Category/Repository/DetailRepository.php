@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Einkauf\Article\Repository;
+namespace App\Einkauf\Category\Repository;
 
 use App\Einkauf\Article\Model\ArticleModel;
 use Foundation\Database\Database;
 
-
-class HomeRepository
+class DetailRepository
 {
-    public function getAll(): array
+    public function getAllArticleByCatID($cat_id): array
     {
         $db = new Database('EinkaufArticle');
         $dbResult = $db->select(['EinkaufArticle.id', 'EinkaufArticle.anzahl', 'EinkaufArticle.name', 'EinkaufBundle.name as bundle', 'EinkaufCat.name as cat', 'EinkaufShop.name as shop'])
@@ -16,7 +15,8 @@ class HomeRepository
             ->join('EinkaufShop', 'EinkaufArticle.shop_id = EinkaufShop.id')
             ->join('EinkaufCat', 'EinkaufArticle.cat_id = EinkaufCat.id')
             ->where('EinkaufArticle.type', '=', ':type')
-            ->args([':type' => 0])
+            ->addToQuery('AND EinkaufArticle.cat_id = :catID')
+            ->args([':type' => 0, ':catID' => $cat_id])
             ->run();
         if (array_key_exists(1, $dbResult)) {
             foreach ($dbResult as $article) {
@@ -25,9 +25,8 @@ class HomeRepository
         } elseif (!empty($dbResult)) {
             $result[] = new ArticleModel($dbResult['id'], $dbResult['anzahl'], $dbResult['name'], $dbResult['bundle'], $dbResult['shop'], $dbResult['cat']);
         } else {
-            $result = [];
+            $result =  [];
         }
         return $result;
     }
 }
-
