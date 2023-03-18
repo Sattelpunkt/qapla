@@ -40,7 +40,7 @@ class Database
     {
         $this->select = true;
         $columns = implode(',', $columns);
-        $this->query = "SELECT $columns FROM `$this->table`";
+        $this->query = "SELECT  $columns FROM `$this->table`";
         return $this;
     }
 
@@ -131,7 +131,7 @@ class Database
     public function run(): array|bool
     {
         //echo $this->query;
-        //echo "<br />";
+       // echo "<br />";
         if (!empty($this->args)) {
             $stmt = $this->dbh->prepare($this->query);
             $stmt->execute($this->args);

@@ -10,3 +10,5 @@ $this->add('/shop/settings/edit/:id', 'Einkauf\Shop\Controller\EditSettings@edit
 $this->add('/shop/settings/delete/:id', 'Einkauf\Shop\Controller\DeleteSettings', 'GET');
 
 $this->add('/shop/settings/cat/:id', 'Einkauf\Shop\Controller\CatSort', 'POST');
+
+$this->add('/shop/detail/:id', 'Einkauf\Shop\Controller\Detail', 'GET');
